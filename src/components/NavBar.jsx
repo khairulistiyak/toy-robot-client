@@ -1,23 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { IoIosLogOut } from "react-icons/io";
 import logo from "../../src/assets/img/logo.png";
 import NavMenus from "./NavMenus";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Avatar = () => {
+  const { user } = useContext(AuthContext);
+  // console.log(user);
+
+  const displayName = user?.displayName;
+
   return (
-    <motion.div whileHover={{ scale: 1.1 }} className="avatar">
-      <div className="w-14 me-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-        <img
-          src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-          alt="Avatar"
-        />
-      </div>
-    </motion.div>
+    <>
+      {user ? (
+        <>
+          <motion.div whileHover={{ scale: 1.1 }} className="avatar">
+            <div className="w-14 me-10 rounded-full ring ring-slate-300 ring-offset-base-100 ring-offset-2">
+              <img
+                src={user?.photoURL}
+                title={displayName ? `Hello, ${displayName}!` : "User"}
+                alt="Avatar"
+              />
+            </div>
+          </motion.div>
+        </>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut().then().catch();
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -58,21 +79,39 @@ const NavBar = () => {
           <NavMenus></NavMenus>
         </ul>
       </div>
+      {/* <p>{user.email}</p> */}
       <div className="navbar bg-base-100 navbar-end">
         <Avatar />
 
-        <NavLink
-          to="/logIn"
-          className="bg-orange-500 btn text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-900 "
-        >
-          Login
-        </NavLink>
-        <NavLink
-          to="/signUp"
-          className="bg-orange-500 btn text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-900 "
-        >
-          SignUp
-        </NavLink>
+        <div>
+          {user ? (
+            <>
+              <NavLink
+                onClick={handleLogout}
+                to="/logIn"
+                className="me-5 menu  btn py-2  rounded-md hover:bg-neutral hover:text-white focus:outline-none focus:bg-slate-800 focus:text-slate-400 "
+              >
+                <IoIosLogOut></IoIosLogOut>
+                LogOut
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/signUp"
+                className=" me-5 menu  btn py-2 px-4 rounded-md hover:bg-neutral hover:text-white focus:outline-none focus:bg-slate-800 focus:text-slate-400 "
+              >
+                SignUp
+              </NavLink>
+              <NavLink
+                to="/logIn"
+                className=" menu  btn py-2 px-4 rounded-md hover:bg-neutral hover:text-white focus:outline-none focus:bg-slate-800 focus:text-slate-400"
+              >
+                Login
+              </NavLink>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
