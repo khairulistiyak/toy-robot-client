@@ -1,4 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
+import { CiLight } from "react-icons/ci";
+import { MdDarkMode } from "react-icons/md";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -18,6 +21,29 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allToy, setAllToy] = useState([]);
+
+  // darkMode start
+  const [isDarkMode, setDarkMode] = useState(true);
+  const [darkText, setDarkText] = useState("");
+
+  const handleDarkMode = () => {
+    setDarkMode(!isDarkMode);
+    if (isDarkMode) {
+      return setDarkText(
+        <>
+          <CiLight className="text-2xl text-yellow-500" />
+        </>
+      );
+    } else {
+      return setDarkText(
+        <>
+          <MdDarkMode className="text-2xl text-slate-950" />
+        </>
+      );
+    }
+  };
+
+  // darkMode end
 
   useEffect(() => {
     const url = "http://localhost:5000/allToy";
@@ -64,6 +90,8 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     logOut,
     allToy,
+    handleDarkMode,
+    darkText,
   };
 
   return (

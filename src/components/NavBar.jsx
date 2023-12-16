@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
@@ -8,7 +8,6 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Avatar = () => {
   const { user } = useContext(AuthContext);
-  // console.log(user);
 
   const displayName = user?.displayName;
 
@@ -33,8 +32,10 @@ const Avatar = () => {
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ handleDarkMode, darkText }) => {
+  // console.log(darkText);
   const { user, logOut } = useContext(AuthContext);
+
   const handleLogout = () => {
     logOut().then().catch();
   };
@@ -89,10 +90,9 @@ const NavBar = () => {
               <NavLink
                 onClick={handleLogout}
                 to="/logIn"
-                className="me-5 menu  btn py-2  rounded-md hover:bg-neutral hover:text-white focus:outline-none focus:bg-slate-800 focus:text-slate-400 "
+                className="me-5 menu ps-3 pe-5 btn py-2  rounded-md hover:bg-neutral hover:text-white focus:outline-none focus:bg-slate-800 focus:text-slate-400 "
               >
-                <IoIosLogOut></IoIosLogOut>
-                LogOut
+                <IoIosLogOut></IoIosLogOut> LogOut
               </NavLink>
             </>
           ) : (
@@ -112,6 +112,11 @@ const NavBar = () => {
             </>
           )}
         </div>
+        <p>
+          <button className="ms-10 btn" onClick={() => handleDarkMode()}>
+            {darkText}
+          </button>
+        </p>
       </div>
     </div>
   );

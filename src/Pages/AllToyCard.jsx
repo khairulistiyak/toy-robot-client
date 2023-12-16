@@ -1,7 +1,7 @@
 import React from "react";
 
 const AllToyCard = ({ allToy }) => {
-  console.log(allToy.category);
+  console.log(allToy);
   const { photoUrl, models, name } = allToy;
   return (
     <div className="card w-52 bg-base-100 shadow-xl">
