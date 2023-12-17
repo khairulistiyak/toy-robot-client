@@ -6,7 +6,7 @@ const Interactive = ({ items }) => {
   console.log(items);
   if (items.category == "Interactive Robots") {
     const { name, photoUrl, description, price, rating } = items;
-    const descriptionSlice = description.slice(0, 80);
+    const descriptionSlice = description?.slice(0, 80);
     return (
       <>
         <div>

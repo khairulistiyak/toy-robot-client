@@ -4,6 +4,7 @@ import AllToyCard from "./AllToyCard";
 
 const AllToys = () => {
   const allToys = useLoaderData();
+  console.log(allToys);
 
   return (
     <>

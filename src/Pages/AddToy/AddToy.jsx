@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddToy = () => {
   const { allToy, user } = useContext(AuthContext);
@@ -51,8 +52,25 @@ const AddToy = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(addToys),
     })
-      .then()
-      .then();
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          });
+        }
+      });
   };
 
   // chipset , models , rating, sensors, weight, colors

@@ -3,8 +3,7 @@ import React from "react";
 
 const Educational = ({ items }) => {
   const { name, photoUrl, description, price, rating } = items;
-
-  const descriptionSlice = description.slice(0, 80);
+  const descriptionSlice = description?.slice(0, 0);
   if (items.category == "Educational Robots")
     return (
       <div>

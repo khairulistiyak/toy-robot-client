@@ -3,7 +3,7 @@ import React from "react";
 
 const ComedyToy = ({ items }) => {
   const { name, photoUrl, description, price, rating } = items;
-  const descriptionSlice = description.slice(0, 80);
+  const descriptionSlice = description?.slice(0, 80);
 
   if (items.category == "Comedy Toy") {
     return (
