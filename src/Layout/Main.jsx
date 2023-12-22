@@ -8,9 +8,7 @@ import { MdDarkMode } from "react-icons/md";
 
 const Main = () => {
   const [isDarkMode, setDarkMode] = useState(true);
-  const [darkText, setDarkText] = useState(
-    <CiLight className="text-2xl text-yellow-500" />
-  );
+  const [darkText, setDarkText] = useState(<CiLight className="text-2xl text-yellow-500" />);
 
   const handleDarkMode = () => {
     setDarkMode(!isDarkMode);
@@ -35,7 +33,7 @@ const Main = () => {
         <div>
           <NavBar handleDarkMode={handleDarkMode} darkText={darkText}></NavBar>
         </div>
-        <div className=" md:container lg:Container xl:container 2xl:container max-auto px-10">
+        <div className=" md:container lg:Container xl:container 2xl:container max-auto px-10 w-full mx-auto">
           <Outlet></Outlet>
         </div>
         <div>

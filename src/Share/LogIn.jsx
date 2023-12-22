@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import SocialLogin from "./SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const LogIn = () => {
   const { logInUser } = useContext(AuthContext);
+
+  const location = useLocation();
+  console.log(location);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;

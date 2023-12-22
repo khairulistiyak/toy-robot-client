@@ -10,6 +10,7 @@ import SignUp from "../Share/SignUp";
 import Home from "../Pages/Home";
 import Gallery from "../Pages/Gallery/Gallery";
 import AddToy from "../Pages/AddToy/AddToy";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addToy",
-        element: <AddToy></AddToy>,
+        element: (
+          <PrivateRoute>
+            <AddToy></AddToy>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myToys",

@@ -12,13 +12,10 @@ const Gallery = () => {
   }, []);
   return (
     <div>
-      <h1 className="text-3xl uppercase font-bold mt-10  text-center">
-        Gallery
-      </h1>
+      <h1 className="text-3xl uppercase font-bold mt-10  text-center">Gallery</h1>
 
       <p className=" text-center mb-10 mt-5">
-        Embark on a visual journey through the captivating world of Toy Robot!{" "}
-        <br />
+        Embark on a visual journey through the captivating world of Toy Robot! <br />
         Our gallery is a kaleidoscope of joy.
       </p>
 
