@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import SocialLogin from "./SocialLogin";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const LogIn = () => {
   const { logInUser } = useContext(AuthContext);
-
+  const naviGate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  const from = location.state?.from?.pathname || "/";
+  // console.log(location);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -19,9 +20,10 @@ const LogIn = () => {
     logInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        naviGate(from);
       })
       .catch((error) => {
-        console.log(error.massage);
+        // console.log(error.massage);
       });
   };
 

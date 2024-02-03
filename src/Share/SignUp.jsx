@@ -25,6 +25,8 @@ const SignUp = () => {
 
     signUp(email, password)
       .then((result) => {
+        0;
+
         console.log(result.user);
 
         if (result.user.uid) {
@@ -37,9 +39,7 @@ const SignUp = () => {
                 className="flex  gap-3 items-center"
               >
                 <IoMdCheckmarkCircleOutline className="text-xl text-green-600" />
-                <small className="text-green-600">
-                  Successfully registered your account
-                </small>
+                <small className="text-green-600">Successfully registered your account</small>
               </motion.div>
             </>
           );
@@ -75,15 +75,8 @@ const SignUp = () => {
         onSubmit={handleSignUp}
       >
         <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-4"
-        >
-          <label className="block text-gray-600 text-sm font-semibold mb-2">
-            Name
-          </label>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="mb-4">
+          <label className="block text-gray-600 text-sm font-semibold mb-2">Name</label>
           <input
             type="text"
             className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500 mb-4"
@@ -91,15 +84,8 @@ const SignUp = () => {
             name="name"
           />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="mb-4"
-        >
-          <label className="block text-gray-600 text-sm font-semibold mb-2">
-            Email
-          </label>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }} className="mb-4">
+          <label className="block text-gray-600 text-sm font-semibold mb-2">Email</label>
           <input
             type="email"
             className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500 mb-4"
@@ -107,15 +93,8 @@ const SignUp = () => {
             name="email"
           />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mb-4"
-        >
-          <label className="block text-gray-600 text-sm font-semibold mb-2">
-            Password
-          </label>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.5 }} className="mb-4">
+          <label className="block text-gray-600 text-sm font-semibold mb-2">Password</label>
           <input
             type="password"
             className="w-full border rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500 mb-4"

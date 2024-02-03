@@ -1,16 +1,24 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaFacebook } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const SocialLogin = () => {
   const { googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  const naviGate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+  console.log(location);
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        console.log(result.user);
+        naviGate(from);
+      })
       .catch((error) => {
         console.log(error.message);
       });
@@ -22,9 +30,7 @@ const SocialLogin = () => {
 
   return (
     <div className="grid justify-center mt-2">
-      <h1 className="text-center font-bold text-slate-500 mb-3">
-        Or Sign Up with
-      </h1>
+      <h1 className="text-center font-bold text-slate-500 mb-3">Or Sign Up with</h1>
       <ul className="menu menu-horizontal gap-10">
         <li onClick={handleGoogleLogin}>
           <motion.div whileHover="hover" variants={iconVariants}>

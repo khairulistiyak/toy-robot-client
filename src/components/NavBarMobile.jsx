@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../src/assets/img/logo.png";
 import { IoIosLogOut } from "react-icons/io";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
 
-const NavMenus = () => {
+const NavBarMobile = () => {
   const { user, logOut } = useContext(AuthContext);
   const handleLogout = () => {
     logOut().then().catch();
@@ -43,7 +43,6 @@ const NavMenus = () => {
         <>
           <motion.li whileHover={{ scale: 1.1 }} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}>
             <NavLink to="/Login">Login</NavLink>
-            <NavLink to="/myToys">Login</NavLink>
           </motion.li>
         </>
       )}
@@ -52,4 +51,4 @@ const NavMenus = () => {
   return <>{menus}</>;
 };
 
-export default NavMenus;
+export default NavBarMobile;
