@@ -7,7 +7,7 @@ const AllToys = () => {
   // const [allToys, setAllToys] = useState(loadedToys);
   const { allToy, setAllToy } = useContext(AuthContext);
 
-  console.log(allToy);
+  // console.log(allToy);
 
   return (
     <>
