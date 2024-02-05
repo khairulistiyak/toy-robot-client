@@ -49,7 +49,12 @@ const AuthProvider = ({ children }) => {
     const url = "http://localhost:5000/allToy";
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setAllToy(data));
+      .then((data) => {
+        if (!data) {
+          return setLoading(true);
+        }
+        setAllToy(data);
+      });
   }, []);
 
   const googleProvider = new GoogleAuthProvider();
@@ -92,11 +97,11 @@ const AuthProvider = ({ children }) => {
     allToy,
     handleDarkMode,
     darkText,
+    loading,
+    setAllToy,
   };
 
-  return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData, useParams, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import ToyDetail from "./ToyDetails/ToyDetails";
 
-const AllToyCard = ({ item, setLoadedToys, index }) => {
-  const { price, photoUrl, models, name, category, _id } = item;
+const AllToyCard = ({ item, setAllToy, index }) => {
+  const { _id } = item;
+  const [toyDetails, setToyDetails] = useState([]);
+  console.log(toyDetails);
 
-  const [toy, setToy] = useState({});
+  // const handleShowDetails = () => {};
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/allToy/${_id}`)
-      .then((res) => res.json())
-      .then((data) => setToy(data));
-  }, []);
   // sweet alert delete
   const handleDelete = (_id) => {
     Swal.fire({
@@ -37,16 +33,13 @@ const AllToyCard = ({ item, setLoadedToys, index }) => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              const remaining = item.filter((toys) => toys._id !== _id);
-              setLoadedToys(remaining);
+              // const remaining = item.filter((toys) => toys._id !== _id);
+              // setAllToy(remaining);
+              setAllToy((prevToys) => prevToys.filter((toy) => toy._id !== _id));
             }
           });
       }
     });
-  };
-
-  const handleDetails = (item) => {
-    console.log(item);
   };
 
   return (
@@ -59,19 +52,19 @@ const AllToyCard = ({ item, setLoadedToys, index }) => {
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
-                <img src={photoUrl} alt="Avatar Tailwind CSS Component" />
+                <img src={item?.photoUrl} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>
               <div className="font-bold">
-                <Link to={`/allToy/${_id}`}>{name}</Link>
+                <Link to={`/allToy/${item._id}`}>{item?.name}</Link>
               </div>
-              <div className="text-sm opacity-50">Models : {models} </div>
+              <div className="text-sm opacity-50">Models : {item?.models} </div>
             </div>
           </div>
         </td>
-        <td>{category}</td>
-        <td>${price}</td>
+        <td>{item?.category}</td>
+        <td>${item?.price}</td>
         <th>
           <p>{item?.displayName}</p>
         </th>
@@ -81,16 +74,9 @@ const AllToyCard = ({ item, setLoadedToys, index }) => {
           </button>
         </th>
         <th>
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <div onClick={() => handleDetails(_id)}>
-            <Link to={`/allToy/${item._id}`}>
-              <button className="btn" onClick={() => document.getElementById("my_modal_1").showModal()}>
-                open modal
-              </button>
-            </Link>
-            <ToyDetail></ToyDetail>
-          </div>
+          <button className="btn">details</button>
         </th>
+        <th>{/* Open the modal using document.getElementById('ID').showModal() method */}</th>
       </tr>
     </>
   );

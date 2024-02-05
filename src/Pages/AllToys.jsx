@@ -5,10 +5,9 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const AllToys = () => {
   // const [allToys, setAllToys] = useState(loadedToys);
-  const { allToy } = useContext(AuthContext);
-  // console.log(allToy);
-  const toyDetails = useLoaderData();
-  console.log(toyDetails);
+  const { allToy, setAllToy } = useContext(AuthContext);
+
+  console.log(allToy);
 
   return (
     <>
@@ -25,10 +24,9 @@ const AllToys = () => {
             </tr>
           </thead>
           <tbody>
-            {allToy.map((item, index) => (
-              <AllToyCard index={index} key={item._id} item={item}></AllToyCard>
+            {allToy?.map((item, index) => (
+              <AllToyCard index={index} key={item._id} item={item} setAllToy={setAllToy}></AllToyCard>
             ))}
-            {/* <AllToyCard></AllToyCard> */}
           </tbody>
         </table>
       </div>
