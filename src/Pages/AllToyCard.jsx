@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import ToyDetail from "./ToyDetails/ToyDetails";
 
-const AllToyCard = ({ allToy, allToys, setLoadedToys }) => {
-  console.log(allToy);
-  const { photoUrl, models, name, _id } = allToy;
+const AllToyCard = ({ item, setLoadedToys, index }) => {
+  const { price, photoUrl, models, name, category, _id } = item;
+
+  const [toy, setToy] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/allToy/${_id}`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setToy(data));
   }, []);
   // sweet alert delete
   const handleDelete = (_id) => {
@@ -34,7 +37,7 @@ const AllToyCard = ({ allToy, allToys, setLoadedToys }) => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              const remaining = allToys.filter((toys) => toys._id !== _id);
+              const remaining = item.filter((toys) => toys._id !== _id);
               setLoadedToys(remaining);
             }
           });
@@ -42,13 +45,15 @@ const AllToyCard = ({ allToy, allToys, setLoadedToys }) => {
     });
   };
 
+  const handleDetails = (item) => {
+    console.log(item);
+  };
+
   return (
     <>
       <tr>
         <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
+          <label>{index + 1}</label>
         </th>
         <td>
           <div className="flex items-center gap-3">
@@ -58,19 +63,33 @@ const AllToyCard = ({ allToy, allToys, setLoadedToys }) => {
               </div>
             </div>
             <div>
-              <div className="font-bold">{name}</div>
+              <div className="font-bold">
+                <Link to={`/allToy/${_id}`}>{name}</Link>
+              </div>
               <div className="text-sm opacity-50">Models : {models} </div>
             </div>
           </div>
         </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
+        <td>{category}</td>
+        <td>${price}</td>
         <th>
-          <button className="btn btn-ghost btn-xs">{allToy?.displayName}</button>
+          <p>{item?.displayName}</p>
+        </th>
+        <th>
+          <button className="btn" onClick={() => handleDelete(_id)}>
+            Delete
+          </button>
+        </th>
+        <th>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <div onClick={() => handleDetails(_id)}>
+            <Link to={`/allToy/${item._id}`}>
+              <button className="btn" onClick={() => document.getElementById("my_modal_1").showModal()}>
+                open modal
+              </button>
+            </Link>
+            <ToyDetail></ToyDetail>
+          </div>
         </th>
       </tr>
     </>

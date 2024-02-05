@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import AllToyCard from "./AllToyCard";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AllToys = () => {
-  const loadedToys = useLoaderData();
-  const [allToys, setAllToys] = useState(loadedToys);
+  // const [allToys, setAllToys] = useState(loadedToys);
+  const { allToy } = useContext(AuthContext);
+  // console.log(allToy);
+  const toyDetails = useLoaderData();
+  console.log(toyDetails);
 
   return (
     <>
@@ -13,23 +17,19 @@ const AllToys = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
+              <th>#</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Seller Name</th>
             </tr>
           </thead>
           <tbody>
-            {allToys.map((allToy) => (
-              <AllToyCard key={allToy._id} allToy={allToy} allToys={allToys} setLoadedToys={setAllToys}></AllToyCard>
+            {allToy.map((item, index) => (
+              <AllToyCard index={index} key={item._id} item={item}></AllToyCard>
             ))}
+            {/* <AllToyCard></AllToyCard> */}
           </tbody>
-          {/* foot */}
         </table>
       </div>
     </>

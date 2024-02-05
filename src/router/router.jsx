@@ -1,16 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
-import Header from "../Pages/Header";
-import AllToys from "../Pages/Alltoys";
+import AllToys from "../Pages/AllToys";
 import Blogs from "../Pages/Blogs";
-
 import MyToys from "../Pages/MyToys";
 import LogIn from "../Share/LogIn";
 import SignUp from "../Share/SignUp";
 import Home from "../Pages/Home";
-import Gallery from "../Pages/Gallery/Gallery";
 import AddToy from "../Pages/AddToy/AddToy";
 import PrivateRoute from "./PrivateRoute";
+import AllToyCard from "../Pages/AllToyCard";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +22,12 @@ const router = createBrowserRouter([
       {
         path: "/allToys",
         element: <AllToys></AllToys>,
-        loader: () => fetch("http://localhost:5000/allToy"),
+        // loader: () => fetch(""),
+      },
+      {
+        path: "/allToy/:id",
+        element: <AllToyCard></AllToyCard>,
+        loader: ({ params }) => fetch(`http://localhost:5000/allToy/${params.id}`),
       },
       {
         path: "/blogs",
